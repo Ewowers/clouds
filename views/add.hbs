@@ -1,0 +1,51 @@
+<div class='container-fluid text-white isAdd'>
+  <div class='row mb-3'>
+    <div class='col'>
+      <div class='btn-group'>
+        <button class='btn btn-light' id='start'>Добавить</button>
+      </div>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      <ul>
+        {{#each product}}
+          <li class='d-flex justify-content-between rows' data-id='{{_id}}'>
+
+            <span>{{name}}</span>
+            <span>{{que}}</span></li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class='col-md'>
+      <ul>
+        <li class='d-flex'>
+          <div class='col-4'>
+            <p
+              class='m-auto d-flex align-items-center'
+              style='height: 100%;'
+            >Название</p>
+          </div>
+          <div class='col-2'>
+            Количество
+          </div>
+          <div class='col-2'>
+            Цена
+          </div>
+          <div class='col-2'>
+            Итог
+          </div>
+        </li>
+        <div id='json'>
+
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>
+<style>
+  .isAdd ul { padding: 0; margin: 0; } .isAdd li{ list-style: none; padding:
+  15px; border: #fff solid; border-bottom: none;} li:last-child{ border-bottom:
+  solid; } .isAdd ul li .col-2{ padding: 0 15px; }
+</style>
+<script src='/admin/add.js'></script>

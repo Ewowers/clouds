@@ -1,0 +1,59 @@
+<div class='container-fluid isMoney'>
+  <div class='row py-3'>
+    <div class='col-2'>Ордер</div>
+    <div class='col-2'>Время</div>
+    <div class='col-2'>Расход/Доход</div>
+    <div class='col-2'>Покупатель</div>
+    <div class='col-2'>Автор</div>
+    <div class='col-2'>Платеж</div>
+  </div>
+  {{#each line}}
+    <p class='h1 text-white'> {{day}}</p>
+    {{#each arr}}
+      <div class='row py-3 isRow' data-id={{_id}}>
+        <div class='col-2'>{{title}}</div>
+        <div class='col-2'>{{time}}</div>
+        <div class='col-2'>{{summ}}</div>
+        <div class='col-2'>{{sales}}</div>
+        <div class='col-2'>{{author}}</div>
+        <div class='col-2'>{{paymentcategory}}</div>
+      </div>
+    {{/each}}
+  {{/each}}
+</div>
+<style>
+  .isMoney .row{ border: 1px solid #fff; color: #fff; font-size: 18px; }
+</style>
+<div id='modal' class='bg-dark'>
+  <p class='h5 text-white mt-5 d-flex justify-content-between px-3'>
+    <span>
+      Информация о операций
+    </span>
+    <span id='ModalClose' class='text-white'><i class='fas fa-times'></i></span>
+  </p>
+  <div id='basket' class='container-fluid text-white'>
+    <div class='row'>
+      <div class='col-4' style='border-right: 1px solid #fff;'>
+        Название
+      </div>
+      <div class='col-2' style='border-right: 1px solid #fff;'>
+        Цена
+      </div>
+      <div class='col-2' style='border-right: 1px solid #fff;'>
+        Кол
+      </div>
+      <div class='col-2'>
+        Цена
+      </div>
+    </div>
+  </div>
+  <p class='h3 text-white d-flex justify-content-between px-4 mt-3'>
+    <span>Пред итог</span>
+    <span id='predItog'>0 тг</span>
+  </p>
+  <p class='h3 text-white d-flex justify-content-between px-4 mt-3'>
+    <span>Итог</span>
+    <span id='Itog'>0 тг</span>
+  </p>
+</div>
+<script src='/admin/product.js'></script>

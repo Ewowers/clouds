@@ -1,0 +1,333 @@
+<div class='container-fluid bg-light'>
+  <div class='row'>
+    <div class='col-6 col-md-3 pb-3 pt-3'>
+      <input
+        type='text'
+        class='form-control'
+        placeholder='search'
+        id='search'
+      />
+    </div>
+    <div class='col-6 col-md-3 pb-3 pt-3'>
+      <select id='sort' class='form-control'>
+        <option value='all'>all</option>
+        {{#each line}}
+          <option value={{this}}>{{this}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class='col-md-2 pb-3 pt-3'>
+      <div class='d=flex justify-content-between'>
+        <button
+          class='btn btn-primary'
+          data-bs-toggle='modal'
+          data-bs-target='#Vozrat'
+        >Возрат</button>
+        <button class='btn btn-secondary' id='historys'>История</button>
+        <button class='btn btn-warning' onclick='handOver()'>Сдать пост</button>
+
+      </div>
+    </div>
+    <div class='col-12 col-md-4 pb-3 pt-3' style='background-color: #fff;'>
+      <div class='input-group'>
+        <select class='form-control'>
+          <option value='Розничный покупатель'>Розничный покупатель</option>
+        </select>
+        <span class='input-group-text' id='basic-addon1'>
+          <i class='fas fa-user-plus'></i>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='d-flex'>
+  <div
+    class='container-fluid bg-light col-12 col-md-8'
+    style='min-height: 100vh;'
+  >
+    <div class='row'>
+      <div class='col-md-12'>
+        <div class='cardList'>
+          {{#each product}}
+            <div
+              class='card'
+              data-type={{type}}
+              id={{_id}}
+              data-name='{{name}}'
+            >
+              <p class='h6'>
+                {{name}}
+              </p>
+              <p>{{prise}}</p>
+              <p>{{que}}</p>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class='col-4'
+    style='background-color: #fff;'
+    style='position: relative;'
+  >
+    <div class='container-fluid'>
+      <div class='row border-bottom'>
+        <div class='col-3'>Найменование</div>
+        <div class='col-2'>Цена</div>
+        <div class='col-2'>Количество</div>
+        <div class='col-2'>Скидка</div>
+        <div class='col-2'>Итог</div>
+        <div class='col'></div>
+      </div>
+      {{! <div class='row border-bottom align-items-center'>
+        <div class='col-3'>Elf bar</div>
+        <div class='col-2'>2500</div>
+        <div class='col-2'>
+          <input
+            type='number'
+            class='w-100 form-control-sm form-control bg-warning'
+            value='1'
+          />
+        </div>
+        <div class='col-2'>
+          <button
+            class='btn-warning w-100'
+            style='
+              border-radius: .2rem; 
+              border: 1px solid #fff; 
+              padding: .25rem .5rem;
+              min-height: calc(1.5em + .5rem + 2px)
+              '
+          >0%</button>
+        </div>
+        <div class='col-2 border'>2500</div>
+        <div class='col-1'>
+          <button class='btn'><i class='bi bi-trash'></i></button>
+        </div>
+      </div> }}
+      <div id='container'></div>
+      <div id='itogs' class='mt-5 d-flex justify-content-between h3'>
+        <span>Итог</span>
+        <span class='isItogs'>0тг</span>
+      </div>
+      <div class='btn-group w-100'>
+        <button class='btn-danger btn col-1' id='clear'>
+          <i class='bi bi-trash'></i>
+        </button>
+        <button class='btn btn-success col-11' id='sale'>Продажа</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class='modal fade'
+  id='saleModal'
+  tabindex='-1'
+  aria-labelledby='exampleModalLabel'
+  aria-hidden='true'
+>
+  <div class='modal-dialog modal-fullscreen'>
+    <div class='modal-content'>
+
+      <div class='modal-body'>
+        <div class='container-fluid col-8'>
+          <div class='row'>
+            <div class='col-md-6'>
+              <p class='h1 mb-5'>
+                Платежи
+              </p>
+              <p class='h2 d-flex justify-content-between mb-3'>
+                <span>Итог</span>
+                <span class='isItogsss'>0тг</span>
+              </p>
+              <p class='h2 d-flex justify-content-between mb-3'>
+                <span>Принято</span>
+                <span id='accepted'>0тг</span>
+              </p>
+              <p class='h2 d-flex justify-content-between mb-3'>
+                <span>Сдача</span>
+                <span id='surrender'>0тг</span>
+              </p>
+              <textarea
+                id='commend'
+                class='form-control'
+                rows='4'
+                placeholder='Комментарий'
+              ></textarea>
+            </div>
+            <div class='col-md-6'>
+              <p class='h1 mb-5'>
+                Платежи
+              </p>
+              <div class='btn-group btnListType'>
+                <button
+                  class='btn btn-success'
+                  data-type='Наличные'
+                >Наличные</button>
+                <button
+                  class='btn btn-outline-warning'
+                  data-type='Каспи'
+                >Каспи</button>
+                <button
+                  class='btn btn-outline-danger'
+                  data-type='QR'
+                >QR</button>
+                <button
+                  class='btn btn-outline-secondary'
+                  data-type='алл'
+                >Дробная</button>
+              </div>
+              <p class='h3 mt-3' id='TextSales'>Наличные</p>
+              <input
+                type='text'
+                class='form-control mb-3 mt-3'
+                value='0'
+                data-types='Наличные'
+                id='inputSales'
+              />
+              <div class='btnList mt-3 justify-content-between d-flex'>
+
+                <button class='btn btn-outline-success'>1000</button>
+                <button class='btn btn-outline-success'>1500</button>
+                <button class='btn btn-outline-success'>2000</button>
+                <button class='btn btn-outline-success'>2500</button>
+                <button class='btn btn-outline-success'>5000</button>
+                <button class='btn btn-outline-success'>7500</button>
+                <button class='btn btn-outline-success'>10000</button>
+              </div>
+              <button
+                class='btn btn-primary w-100 mt-3'
+                id='start'
+                onclick='Fetch()'
+                disabled
+              ><p class='h1'>Принят</p></button>
+            </div>
+            <div class='col-12'>
+              <button
+                class='btn btn-danger'
+                data-bs-dismiss='modal'
+              >Закрыть</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class='modal fade'
+  id='discont'
+  tabindex='-1'
+  aria-labelledby='exampleModalLabel'
+  aria-hidden='true'
+>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h5 class='modal-title' id='exampleModalLabel'>Modal title</h5>
+        <button
+          type='button'
+          class='btn-close'
+          data-bs-dismiss='modal'
+          aria-label='Close'
+        ></button>
+      </div>
+      <div class='modal-body'>
+        <div class='input-group mb-3'>
+          <input
+            type='number'
+            class='form-control'
+            placeholder='0%'
+            aria-label="Recipient's username"
+            aria-describedby='basic-addon2'
+            id='asddsa'
+          />
+          <span class='input-group-text' id='basic-addon2'><i
+              class='fas fa-percent'
+            ></i></span>
+        </div>
+        <div class='input-group mb-3'>
+          <input
+            type='number'
+            class='form-control'
+            placeholder='0тг'
+            aria-label="Recipient's username"
+            aria-describedby='basic-addon2'
+          />
+          <span class='input-group-text' id='basic-addon2'><i
+              class='fas fa-money-bill-wave-alt'
+            ></i></span>
+        </div>
+        <p class='d-flex justify-content-between'>
+          <span>Пред итог</span>
+          <span id='isPredItogModalDiscont'>0тг</span>
+        </p>
+        <p class='d-flex justify-content-between'>
+          <span>Итог</span>
+          <span id='isItogModalDiscont'>0тг</span>
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class='history'>
+  <div class='container-fluid'>
+
+  </div>
+</div>
+
+<div class='modal fade' id='Vozrat' tabindex='-1'>
+  <div class='modal-dialog modal-lg'>
+    <div class='modal-content'>
+
+      <div class='modal-body'>
+        <div class='container-fluid'>
+          <div class='row'>
+            <div class='col-4 listenVosrat'>
+              <input
+                type='text'
+                class='form-control mb-3'
+                placeholder='search'
+              />
+              {{#each product}}
+                <p
+                  class='border-bottom'
+                  data-id='{{_id}}'
+                  data-prise='{{prise}}'
+                >{{name}}</p>
+              {{/each}}
+            </div>
+            <div class='col-8'>
+              <div class='container-fluid'>
+                <div class='row'>
+                  <input
+                    type='text'
+                    disabled
+                    class='form-control'
+                    value='Что то вроде корзины'
+                  />
+                </div>
+              </div>
+              <div class='container-fluid' id='container'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='modal-footer'>
+        <button class='btn btn-secondary'>Закрыть</button>
+        <button
+          class='btn btn-primary'
+          onclick='vozratFetch()'
+        >Отправить</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src='/cashier/cashier.js'></script>
+<script src='/cashier/xml.js'></script>
+<script src='/cashier/fun1.js'></script>

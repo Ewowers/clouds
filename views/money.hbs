@@ -1,0 +1,32 @@
+<div class='container-fluid isMoney text-white'>
+  <div class='row py-3'>
+    <div class='col-2'>Ордер</div>
+    <div class='col-2'>Время</div>
+    <div class='col-2'>Расход/Доход</div>
+    <div class='col-2'>Покупатель</div>
+    <div class='col-2'>Автор</div>
+    <div class='col-2'>Платеж</div>
+  </div>
+  {{#each line}}
+    <p class='h1 text-white'> {{day}}</p>
+    {{#each arr}}
+      <div class='row py-3'>
+        <div class='col-2'>{{title}}</div>
+        <div class='col-2'>{{time}}</div>
+        <div class='col-2'>{{summ}}</div>
+        <div class='col-2'>{{sales}}</div>
+        <div class='col-2'>{{author}}</div>
+        <div class='col-2'>{{paymentcategory}}</div>
+      </div>
+    {{/each}}
+    <div class='d-flex'>
+      <p class='m-0 h3 col-3'>Прибыль : {{cash}}</p>
+      <p class='m-0 h3 col-3'>Расход : {{noCash}}</p>
+      <p class='m-0 h3 col-3'>Зп кассира : {{zp}}</p>
+
+    </div>
+  {{/each}}
+</div>
+<style>
+  .isMoney .row{ border: 1px solid #fff; color: #fff; font-size: 18px; }
+</style>
